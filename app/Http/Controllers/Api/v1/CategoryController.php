@@ -30,30 +30,28 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:name|max:255',
+            'name' => 'required|max:255',
             'description' => 'required',
         ]);
 
-        $category = Category::create(
-            $validatedData->all()
-        );
+        $category = Category::create($validatedData);
 
         return response()->json($category, 201);
+
     }
 
     //Update a Category Function
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:name|max:255',
+            'name' => 'required|max:255',
             'description' => 'required',
         ]);
 
-        $category = Category::create(
-            $validatedData->all()
-        );
+        $category = Category::whereId($id)->update($validatedData);
 
         return response()->json($category, 200);
+
     }
 
     //Delete a Category Function
