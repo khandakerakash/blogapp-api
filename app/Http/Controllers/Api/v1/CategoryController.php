@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 class CategoryController extends Controller
 {
     use ApiResponse;
+
     //Show All Category Function
     public function index()
     {
@@ -51,9 +52,9 @@ class CategoryController extends Controller
 
         $category = Category::findOrFail($id);
 
-        $category = $category->update($data);
+        $category->update($data);
 
-        return $this->showMessage("update successfully");
+        return $this->showMessage("Update successfully");
 
     }
 
@@ -63,6 +64,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return $this->showMessage("delete successfully");
+        return $this->showMessage("Delete successfully");
     }
 }
