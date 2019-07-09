@@ -3,54 +3,57 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Category;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
+    use ApiResponse;
     //Show All Category Function
     public function index()
     {
-//        return Category::all();
-        $categories = Category::latest()
-                        ->orderBy('id', 'desc')
-                        ->get();
-
-        return response()->json($categories, 200);
+        $categories = Category::all();
+        return $this->showAll($categories);
     }
 
     //Show a Single Category Function
     public function show($id)
     {
         $category = Category::findOrFail($id);
-        return response()->json($category, 200);
+        return $this->showOne($category);
     }
 
     //Store a Category Function
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
         ]);
 
-        $category = Category::create($validatedData);
+        $data = $request->all();
+        $category = Category::create($data);
 
-        return response()->json($category, 201);
+        return $this->showOne($category);
 
     }
 
     //Update a Category Function
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
         ]);
 
-        $category = Category::whereId($id)->update($validatedData);
+        $data = $request->all();
 
-        return response()->json($category, 200);
+        $category = Category::findOrFail($id);
+
+        $category = $category->update($data);
+
+        return $this->showMessage("update successfully");
 
     }
 
@@ -60,6 +63,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return response()->json(null, 204);
+        return $this->showMessage("delete successfully");
     }
 }
