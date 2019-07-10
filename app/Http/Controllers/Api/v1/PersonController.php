@@ -27,7 +27,7 @@ class PersonController extends Controller
     {
         $request->validate([
             'first_name' => 'required|max:100',
-            'last_name' => 'max:50',
+            'last_name' => 'required|max:50',
             'email' => 'required|email|max:255|unique:people',
             'phone_no' => 'required',
         ]);
