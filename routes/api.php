@@ -27,10 +27,12 @@ Route::group(['prefix'=>'v1'],function (){
     Route::delete('category/{id}', 'Api\v1\CategoryController@destroy')->name('destroyCategory');
 
     // Person URLS
-    Route::get('people', 'Api\v1\CategoryController@index')->name('showAllPerson');
-    Route::get('person/{id}', 'Api\v1\CategoryController@show')->name('showSinglePerson');
-    Route::post('person', 'Api\v1\CategoryController@store')->name('createPerson');
-    Route::put('person/{id}', 'Api\v1\CategoryController@update')->name('updatePerson');
-    Route::delete('person/{id}', 'Api\v1\CategoryController@destroy')->name('destroyPerson');
+    Route::get('people', 'Api\v1\PersonController@index')->name('showAllPerson');
+    Route::get('person/{id}', 'Api\v1\PersonController@show')->name('showSinglePerson');
+    Route::post('person', 'Api\v1\PersonController@store')->name('createPerson');
+    Route::put('person/{id}', 'Api\v1\PersonController@update')->name('updatePerson');
+    Route::delete('person/{id}', 'Api\v1\PersonController@destroy')->name('destroyPerson');
+
 });
+
 

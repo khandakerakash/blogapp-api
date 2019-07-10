@@ -25,15 +25,43 @@ class PersonController extends Controller
 
     public function store(Request $request)
     {
-//        $request->validate([
-//            'first_name' => 'required|max:255',
-//            'email' => 'required|email|max:255|unique:people',
-//            'phone_no' => 'required',
-//        ]);
+        $request->validate([
+            'first_name' => 'required|max:100',
+            'last_name' => 'max:50',
+            'email' => 'required|email|max:255|unique:people',
+            'phone_no' => 'required',
+        ]);
 
         $data = $request->all();
         $person = Person::create($data);
 
         return $this->showOne($person);
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'first_name' => 'required|max:100',
+            'last_name' => 'max:50',
+            'email' => 'required|email|max:255|unique:people',
+            'phone_no' => 'required',
+        ]);
+
+        $data = $request->all();
+
+        $person = Person::findOrFail($id);
+
+        $person->update($data);
+
+        return $this->showMessage('Update successfully');
+    }
+
+    public function destroy($id)
+    {
+        $person = Person::findOrFail($id);
+        $person->delete();
+
+        return $this->showMessage('Delete successfully');
     }
 }
