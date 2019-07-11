@@ -2,6 +2,7 @@
 
 use App\Category;
 use App\Person;
+use App\Post;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
 
         // factory(Category::class,100)->create();
         // factory(Person::class,100)->create();
+        // factory(Post::class,100)->create();
     }
 }

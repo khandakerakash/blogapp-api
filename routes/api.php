@@ -33,6 +33,13 @@ Route::group(['prefix'=>'v1'],function (){
     Route::put('person/{id}', 'Api\v1\PersonController@update')->name('updatePerson');
     Route::delete('person/{id}', 'Api\v1\PersonController@destroy')->name('destroyPerson');
 
+    // Post URLS
+    Route::get('posts', 'Api\v1\PostController@index')->name('show.all.post');
+    Route::get('post/{id}', 'Api\v1\PostController@show')->name('show.one.post');
+    Route::post('post', 'Api\v1\PostController@add')->name('add.post');
+    Route::put('post/{id}', 'Api\v1\PostController@update')->name('edit.post');
+    Route::delete('post/{id}', 'Api\v1\PostController@destroy')->name('delete.post');
+
 });
 
 

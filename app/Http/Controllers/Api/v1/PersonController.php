@@ -44,7 +44,7 @@ class PersonController extends Controller
         $request->validate([
             'first_name' => 'required|max:100',
             'last_name' => 'required|min:2|max:50',
-            'email' => "required|email|max:191|unique:people,email,$id",
+            'email' => "required|email|max:191|unique:people,email,$id", // Double Quotation sign for ignoring this unique id
             'phone_no' => 'required',
         ]);
 

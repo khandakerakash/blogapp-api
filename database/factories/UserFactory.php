@@ -5,6 +5,7 @@
 
 use App\Category;
 use App\Person;
+use App\Post;
 use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -48,5 +49,13 @@ $factory->define(Person::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'phone_no' => $faker->phoneNumber,
         'address' => $faker->address
+    ];
+});
+
+// POST FACTORY
+$factory->define(Post::class, function (Faker $faker) {
+    return [
+        'title' => $faker->sentence,
+        'body' => $faker->paragraph
     ];
 });
