@@ -27,8 +27,8 @@ class PersonController extends Controller
     {
         $request->validate([
             'first_name' => 'required|max:100',
-            'last_name' => 'required|max:50',
-            'email' => 'required|email|max:255|unique:people',
+            'last_name' => 'required|min:2|max:50',
+            'email' => 'required|email|max:191|unique:people,email',
             'phone_no' => 'required',
         ]);
 
@@ -43,8 +43,8 @@ class PersonController extends Controller
     {
         $request->validate([
             'first_name' => 'required|max:100',
-            'last_name' => 'max:50',
-            'email' => 'required|email|max:255|unique:people',
+            'last_name' => 'required|min:2|max:50',
+            'email' => "required|email|max:191|unique:people,email,$id",
             'phone_no' => 'required',
         ]);
 
