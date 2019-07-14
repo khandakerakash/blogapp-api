@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
         // Calling Category Table Seeder
         // $this->call(CategoryTableSeeder::class);
 
-        // factory(Category::class,100)->create();
-        // factory(Person::class,100)->create();
-        // factory(Post::class,100)->create();
+         factory(Category::class,100)->create();
+         factory(Person::class,100)->create();
+         factory(Post::class,100)->create();
     }
 }

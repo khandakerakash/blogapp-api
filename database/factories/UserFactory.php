@@ -7,6 +7,8 @@ use App\Category;
 use App\Person;
 use App\Post;
 use App\User;
+use Faker\Provider\Image;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -34,9 +36,26 @@ use Faker\Generator as Faker;
 
 // CATEGORY FACTORY
 $factory->define(Category::class, function (Faker $faker) {
+    $number = mt_rand(1,99);
+    $file = Storage::disk('my_loc')->get("$number.jpg");
+    $image = Image::make($file);
+    $image->encode('jpg', 75);
+    $fileName = uniqid('cat_') . ".jpg";
+
+    // Saving original image
+    $image->save(public_path('img/' . $fileName));
+
+    $image->resize(200,200, function ($constraint) {
+       $constraint->aspectRatio();
+    });
+
+    // Saving image after resize it
+    $image->save(public_path('img/category/' . $fileName));
+
     return [
-        'name' => $faker->word,
-        'description' => $faker->paragraph
+        'name' => $faker->unique()->name,
+        'image' =>$fileName,
+        'description' => $faker->text(200)
     ];
 });
 
@@ -54,8 +73,25 @@ $factory->define(Person::class, function (Faker $faker) {
 
 // POST FACTORY
 $factory->define(Post::class, function (Faker $faker) {
+    $number = mt_rand(1,99);
+    $file = Storage::disk('my_loc')->get("$number.jpg");
+    $image = Image::make($file);
+    $image->encode('jpg', 75);
+    $fileName = uniqid('cat_') . ".jpg";
+
+    // Saving original image
+    $image->save(public_path('img/' . $fileName));
+
+    $image->resize(200,200, function ($constraint) {
+        $constraint->aspectRatio();
+    });
+
+    // Saving image after resize it
+    $image->save(public_path('img/post/' . $fileName));
+
     return [
         'title' => $faker->sentence,
-        'body' => $faker->paragraph
+        'image' =>$fileName,
+        'body' => $faker->text(200)
     ];
 });
